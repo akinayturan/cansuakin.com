@@ -3,6 +3,7 @@
 
 	$(document).ready(function() {
 		"use strict";
+		var skrollrInstance = null;
 
 		/*RSVP Form*/
 		$(".submit_block_1").click(function() {
@@ -53,7 +54,7 @@
 
 		/*ScrollR */
 		if ($(window).width() > 1280) {
-		var s = skrollr.init({
+		skrollrInstance = skrollr.init({
 			forceHeight: false
 		});
 		}
@@ -178,7 +179,9 @@
 		});
 		
 		/* Refresh ScrollR */
-		s.refresh($(".guest_wrapper, .our_story"));
+		if (skrollrInstance && typeof skrollrInstance.refresh === "function") {
+			skrollrInstance.refresh($(".guest_wrapper, .our_story"));
+		}
 
 	});
 })(jQuery);
